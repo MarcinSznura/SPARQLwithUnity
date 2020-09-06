@@ -25,7 +25,8 @@ namespace SPARQLNETClient
             Table table = queryClient.Query("PREFIX : <http://dbpedia.org/resource/>" +
                                                  "PREFIX dbo: <http://dbpedia.org/ontology/>" +
                                                  "SELECT ?name ?birth ?death ?person WHERE {" +
-                                                 "     ?person dbo:birthPlace :"+birthPlace+" ." +
+                                                 "     ?person dbo:birthPlace :" + birthPlace + " ." +
+                                                 "     ?person dbo:deathPlace :" + deathPlace + " ." +
                                                  "     ?person dbo:birthDate ?birth ." +
                                                  "     ?person foaf:name ?name ." +
                                                  "     ?person dbo:deathDate ?death ." +
@@ -35,10 +36,10 @@ namespace SPARQLNETClient
 
             Debug.Log(table.GetOutput(OutputFormat.Table));
 
-           queryResult.text = table.GetOutput(OutputFormat.Table);
+            queryResult.text = table.GetOutput(OutputFormat.Table);
 
             //Debug.Log("columns 1: " + table.Columns[1]);
-           // Debug.Log(table.Rows[0].Data[0]);
+            // Debug.Log(table.Rows[0].Data[0]);
             //Debug.Log(table.Rows[0].Data[1]);
             //Debug.Log(table.Rows[0].Data[2]);
             //Debug.Log(table.Rows[0].Data[3]);
@@ -54,5 +55,29 @@ namespace SPARQLNETClient
             }
             */
         }
+
+        public void SetBirthPlace(string _data)
+        {
+            birthPlace = _data;
+        }
+
+        public void SetDeathPlace(string _data)
+        {
+            deathPlace = _data;
+        }
+
+        public void SetBornBefore(string _data)
+        {
+            bornBefore = _data;
+
+        }
+
+        public void SetDiedBefore(string _data)
+        {
+            diedBefore = _data;
+        }
     }
+
+
+
 }
