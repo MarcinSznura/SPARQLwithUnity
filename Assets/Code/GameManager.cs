@@ -12,31 +12,122 @@ namespace SPARQLNETClient
     class GameManager : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI queryResult = null;
+        [SerializeField] TextMeshProUGUI nameText = null;
+        [SerializeField] TextMeshProUGUI birthText = null;
+        [SerializeField] TextMeshProUGUI deathText = null;
+        [SerializeField] TextMeshProUGUI personText = null;
 
         [SerializeField] string birthPlace = "";
         [SerializeField] string bornBefore = "";
         [SerializeField] string deathPlace = "";
         [SerializeField] string diedBefore = "";
-        // 
+
         public void GetQuery()
         {
             QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
 
-            Table table = queryClient.Query("PREFIX : <http://dbpedia.org/resource/>" +
+            string _query = "PREFIX : <http://dbpedia.org/resource/>" +
                                                  "PREFIX dbo: <http://dbpedia.org/ontology/>" +
-                                                 "SELECT ?name ?birth ?death ?person WHERE {" +
-                                                 "     ?person dbo:birthPlace :" + birthPlace + " ." +
-                                                 "     ?person dbo:deathPlace :" + deathPlace + " ." +
-                                                 "     ?person dbo:birthDate ?birth ." +
+                                                 "SELECT ?name ?birth ?death ?person WHERE {";
+
+            if (birthPlace == "")
+            {
+                _query += "     ?person dbo:birthPlace ?birth .";
+            }
+            else
+            {
+                _query += "     ?person dbo:birthPlace :" + birthPlace + " .";
+            }
+
+            if (deathPlace != "")
+            {
+                _query += "     ?person dbo:deathPlace :" + deathPlace + " .";
+            }
+
+            _query += "     ?person dbo:birthDate ?birth ." +
                                                  "     ?person foaf:name ?name ." +
-                                                 "     ?person dbo:deathDate ?death ." +
-                                                 "     FILTER (?birth < \"" + bornBefore + "\"^^xsd:date && ?death < \"" + diedBefore + "\"^^xsd:date) ." +
-                                                 //
-                                                 "} ORDER BY ?birth LIMIT 100");
+                                                 "     ?person dbo:deathDate ?death .";
+
+            if (bornBefore.Length == 0 && diedBefore.Length == 0)
+            {
+            }
+            else if (bornBefore.Length > 0 && diedBefore.Length > 0)
+            {
+                _query += "     FILTER (?birth < \"" + bornBefore + "\"^^xsd:date && ?death < \"" + diedBefore + "\"^^xsd:date) . ";
+            }
+            else if (diedBefore == "")
+            {
+                _query += "     FILTER (?death < \"" + bornBefore + "\"^^xsd:date) .";
+            }
+            else
+            {
+                _query += "     FILTER (?birth < \"" + diedBefore + "\"^^xsd:date) .";
+            }
+
+            _query += "} ORDER BY ?birth";
+
+           Debug.Log(_query + "");
+
+            Table table = queryClient.Query(_query);
 
             Debug.Log(table.GetOutput(OutputFormat.Table));
 
-            queryResult.text = table.GetOutput(OutputFormat.Table);
+            //queryResult.text = table.GetOutput(OutputFormat.Table);
+
+            string _name = "";
+            string _birth = "";
+            string _death = "";
+            string _person = "";
+
+            for (int i=0; i < table.Rows.Count;i++)
+            {
+                string pom = "";
+
+                if (table.Rows[i].Data[0].Length > 30)
+                {
+                   pom = table.Rows[i].Data[0].Substring(0, 30) + '\n';
+                }
+                else
+                {
+                    pom = table.Rows[i].Data[0] + '\n';
+                }
+                _name += pom;
+
+                if (table.Rows[i].Data[1].Length > 50)
+                {
+                    pom = table.Rows[i].Data[1].Substring(0, 50) + '\n';
+                }
+                else
+                {
+                    pom = table.Rows[i].Data[1] + '\n';
+                }
+                _birth += pom ;
+
+                if (table.Rows[i].Data[2].Length > 30)
+                {
+                    pom = table.Rows[i].Data[2].Substring(0, 30) + '\n';
+                }
+                else
+                {
+                    pom = table.Rows[i].Data[2] + '\n';
+                }
+                _death += pom;
+
+                if (table.Rows[i].Data[3].Length > 150)
+                {
+                    pom = table.Rows[i].Data[3].Substring(0, 150) + '\n';
+                }
+                else
+                {
+                    pom = table.Rows[i].Data[3] + '\n';
+                }
+                _person += pom;
+            }
+
+            nameText.text = _name;
+            birthText.text = _birth;
+            deathText.text = _death;
+            personText.text = _person;
 
             //Debug.Log("columns 1: " + table.Columns[1]);
             // Debug.Log(table.Rows[0].Data[0]);
