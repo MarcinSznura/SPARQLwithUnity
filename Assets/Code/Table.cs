@@ -17,13 +17,17 @@ namespace SPARQLNET.Objects
     public class Row : List<string>
     {
         private const char Separator = '\t';
+        public string[] Data = new string[100];
 
         public Row(string rowLine)
         {
             string[] rowCollection = rowLine.Split(Separator);
+            int index = 0;
             foreach (string row in rowCollection)
             {
                 Add(row.TrimStart('"').TrimEnd('"'));
+                Data[index] = row;
+                index++;
             }
         }
     }
