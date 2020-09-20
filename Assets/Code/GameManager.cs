@@ -6,12 +6,12 @@ using SPARQLNET.Misc;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
+using System.Collections.Generic;
 
 namespace SPARQLNETClient
 {
     class GameManager : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI queryResult = null;
         [SerializeField] TextMeshProUGUI nameText = null;
         [SerializeField] TextMeshProUGUI birthText = null;
         [SerializeField] TextMeshProUGUI deathText = null;
@@ -21,6 +21,9 @@ namespace SPARQLNETClient
         [SerializeField] string bornBefore = "";
         [SerializeField] string deathPlace = "";
         [SerializeField] string diedBefore = "";
+
+        private List<string> nameData = new List<string>();
+        private List<string> personData = new List<string>();
 
         public void GetQuery()
         {
@@ -72,17 +75,18 @@ namespace SPARQLNETClient
 
             Debug.Log(table.GetOutput(OutputFormat.Table));
 
-            //queryResult.text = table.GetOutput(OutputFormat.Table);
-
             string _name = "";
             string _birth = "";
             string _death = "";
             string _person = "";
 
+            personData.Clear();
+            nameData.Clear();
+
             for (int i=0; i < table.Rows.Count;i++)
             {
                 string pom = "";
-
+                
                 if (table.Rows[i].Data[0].Length > 30)
                 {
                    pom = table.Rows[i].Data[0].Substring(0, 30) + '\n';
@@ -91,6 +95,17 @@ namespace SPARQLNETClient
                 {
                     pom = table.Rows[i].Data[0] + '\n';
                 }
+
+                if (nameData.Contains(pom))
+                {
+                    Debug.Log("Repeated name!");
+                    continue;
+                }
+                else
+                {
+                    nameData.Add(pom);
+                }
+
                 _name += pom;
 
                 if (table.Rows[i].Data[1].Length > 50)
@@ -121,6 +136,17 @@ namespace SPARQLNETClient
                 {
                     pom = table.Rows[i].Data[3] + '\n';
                 }
+
+                if (personData.Contains(pom))
+                {
+                    Debug.Log("Repeated person!");
+                    continue;
+                }
+                else
+                {
+                    personData.Add(pom);
+                }
+
                 _person += pom;
             }
 
@@ -128,24 +154,9 @@ namespace SPARQLNETClient
             birthText.text = _birth;
             deathText.text = _death;
             personText.text = _person;
-
-            //Debug.Log("columns 1: " + table.Columns[1]);
-            // Debug.Log(table.Rows[0].Data[0]);
-            //Debug.Log(table.Rows[0].Data[1]);
-            //Debug.Log(table.Rows[0].Data[2]);
-
-            //Debug.Log(table.Rows[1].Data[3]);
-
-            /*
-            string asd = table.Columns[1];
-
-            for (int i = 0; i<table.Rows.Count;i++)
-            {
-               var test = Instantiate(row);
-            }
-            */
         }
 
+#region(Input fields)
         public void SetBirthPlace(string _data)
         {
             birthPlace = _data;
@@ -167,7 +178,5 @@ namespace SPARQLNETClient
             diedBefore = _data;
         }
     }
-
-
-
+#endregion
 }
