@@ -56,11 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Code\OutputFormat.cs" />
-    <Compile Include="Assets\Code\OutputHelper.cs" />
-    <Compile Include="Assets\Code\Table.cs" />
-    <Compile Include="Assets\Code\CSVParser.cs" />
     <Compile Include="Assets\Code\QueryClient.cs" />
+    <Compile Include="Assets\Code\OutputHelper.cs" />
     <Compile Include="Assets\Code\GameManager.cs" />
+    <Compile Include="Assets\Code\CSVParser.cs" />
+    <Compile Include="Assets\Code\Table.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -275,11 +275,11 @@
     <Reference Include="UnityEditor">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.3f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="SPARQL.NET">
-      <HintPath>Assets\Dependencies\SPARQL.NET.dll</HintPath>
-    </Reference>
     <Reference Include="RestSharp">
       <HintPath>Assets\Dependencies\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SPARQL.NET">
+      <HintPath>Assets\Dependencies\SPARQL.NET.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.1.3f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

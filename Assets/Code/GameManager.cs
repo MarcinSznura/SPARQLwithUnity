@@ -57,11 +57,11 @@ namespace SPARQLNETClient
             }
             else if (diedBefore == "")
             {
-                _query += "     FILTER (?death < \"" + bornBefore + "\"^^xsd:date) .";
+                _query += "     FILTER (?birth < \"" + bornBefore + "\"^^xsd:date) .";
             }
             else
             {
-                _query += "     FILTER (?birth < \"" + diedBefore + "\"^^xsd:date) .";
+                _query += "     FILTER (?death < \"" + diedBefore + "\"^^xsd:date) .";
             }
 
             _query += "} ORDER BY ?birth";
@@ -113,9 +113,9 @@ namespace SPARQLNETClient
                 }
                 _death += pom;
 
-                if (table.Rows[i].Data[3].Length > 150)
+                if (table.Rows[i].Data[3].Length > 80)
                 {
-                    pom = table.Rows[i].Data[3].Substring(0, 150) + '\n';
+                    pom = table.Rows[i].Data[3].Substring(0, 80) + '\n';
                 }
                 else
                 {
@@ -133,7 +133,6 @@ namespace SPARQLNETClient
             // Debug.Log(table.Rows[0].Data[0]);
             //Debug.Log(table.Rows[0].Data[1]);
             //Debug.Log(table.Rows[0].Data[2]);
-            //Debug.Log(table.Rows[0].Data[3]);
 
             //Debug.Log(table.Rows[1].Data[3]);
 
