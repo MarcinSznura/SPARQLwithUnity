@@ -1,6 +1,7 @@
 # SPARQLwithUnity
 
-    This is Unity project that is using SPARQL.NET to get data from dbpedia about people born in specific region. You can use it to try to find your ancestors based on data stored in dbpedia.
+    This is Unity project that is using SPARQL.NET to get data from dbpedia about people born in specific region. 
+    You can use it to try to find your ancestors based on data stored in dbpedia.
 
 # Built With
 
