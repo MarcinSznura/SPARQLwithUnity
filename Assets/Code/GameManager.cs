@@ -149,6 +149,7 @@ namespace SPARQLNETClient
 
                 _person += pom;
             }
+            Debug.Log("Number of records: " + table.Rows.Count);
 
             nameText.text = _name;
             birthText.text = _birth;
