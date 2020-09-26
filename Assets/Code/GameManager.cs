@@ -86,7 +86,45 @@ namespace SPARQLNETClient
             for (int i=0; i < table.Rows.Count;i++)
             {
                 string pom = "";
-                
+                string nameCheck = "";
+                string personCheck = "";
+
+                if (table.Rows[i].Data[0].Length > 30)
+                {
+                    nameCheck = table.Rows[i].Data[0].Substring(0, 30) + '\n';
+                }
+                else
+                {
+                    nameCheck = table.Rows[i].Data[0] + '\n';
+                }
+
+                if (table.Rows[i].Data[3].Length > 80)
+                {
+                    personCheck = table.Rows[i].Data[3].Substring(0, 80) + '\n';
+                }
+                else
+                {
+                    personCheck = table.Rows[i].Data[3] + '\n';
+                }
+
+                if (nameData.Contains(nameCheck))
+                {
+                    continue;
+                }
+                else
+                {
+                    nameData.Add(nameCheck);
+                }
+
+                if (personData.Contains(personCheck))
+                {
+                    continue;
+                }
+                else
+                {
+                    personData.Add(personCheck);
+                }
+
                 if (table.Rows[i].Data[0].Length > 30)
                 {
                    pom = table.Rows[i].Data[0].Substring(0, 30) + '\n';
@@ -94,16 +132,6 @@ namespace SPARQLNETClient
                 else
                 {
                     pom = table.Rows[i].Data[0] + '\n';
-                }
-
-                if (nameData.Contains(pom))
-                {
-                    Debug.Log("Repeated name!");
-                    continue;
-                }
-                else
-                {
-                    nameData.Add(pom);
                 }
 
                 _name += pom;
@@ -135,16 +163,6 @@ namespace SPARQLNETClient
                 else
                 {
                     pom = table.Rows[i].Data[3] + '\n';
-                }
-
-                if (personData.Contains(pom))
-                {
-                    Debug.Log("Repeated person!");
-                    continue;
-                }
-                else
-                {
-                    personData.Add(pom);
                 }
 
                 _person += pom;
