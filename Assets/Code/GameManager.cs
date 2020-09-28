@@ -7,6 +7,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace SPARQLNETClient
 {
@@ -22,8 +23,13 @@ namespace SPARQLNETClient
         [SerializeField] string deathPlace = "";
         [SerializeField] string diedBefore = "";
 
+        string endpoint = "";
+        string query = "";
+
         private List<string> nameData = new List<string>();
         private List<string> personData = new List<string>();
+
+
 
         public void GetQuery()
         {
@@ -175,7 +181,7 @@ namespace SPARQLNETClient
             personText.text = _person;
         }
 
-#region(Input fields)
+#region(Input fields and buttons)
         public void SetBirthPlace(string _data)
         {
             birthPlace = _data;
@@ -196,6 +202,29 @@ namespace SPARQLNETClient
         {
             diedBefore = _data;
         }
+
+        public void SetEndpoint(string _data)
+        {
+            endpoint = _data;
+        }
+
+        public void SetQuery(string _data)
+        {
+            query = _data;
+        }
+
+        public void SendQuery()
+        {
+            QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
+            Table table = queryClient.Query(query);
+            Debug.Log(table.GetOutput(OutputFormat.Table));
+        }
+
+        public void GoToQueryNumber(int _number)
+        {
+            SceneManager.LoadScene(_number);
+        }
+
     }
 #endregion
 }
