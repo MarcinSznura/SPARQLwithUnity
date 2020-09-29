@@ -225,6 +225,13 @@ namespace SPARQLNETClient
             SceneManager.LoadScene(_number);
         }
 
+        public void FindAnwsers(TextMeshProUGUI _resultField)
+        {
+            QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
+            Table table = queryClient.Query("select distinct ?Concept where {[] a ?Concept} LIMIT 100");
+            Debug.Log(table.GetOutput(OutputFormat.Table));
+            _resultField.text = table.GetOutput(OutputFormat.Table);
+        }
     }
 #endregion
 }
