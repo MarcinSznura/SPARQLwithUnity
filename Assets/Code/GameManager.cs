@@ -18,6 +18,8 @@ namespace SPARQLNETClient
         [SerializeField] TextMeshProUGUI deathText = null;
         [SerializeField] TextMeshProUGUI personText = null;
 
+        [SerializeField] TextMeshProUGUI musicianText = null;
+
         [SerializeField] string birthPlace = "";
         [SerializeField] string bornBefore = "";
         [SerializeField] string deathPlace = "";
@@ -30,8 +32,30 @@ namespace SPARQLNETClient
         private List<string> personData = new List<string>();
 
 
+        public void GetMusician()
+        {
+            QueryClient queryClient = new QueryClient("http://sparql.europeana.eu/");
 
-        public void GetQuery()
+            string _query = @"PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX ore: <http://www.openarchives.org/ore/terms/>
+SELECT ?title ?creator ?mediaURL ?date
+WHERE {
+  ?CHO edm:type " + "SOUND\" ;"+
+      @"ore: proxyIn? proxy;
+        dc: title? title;
+        dc: creator? creator;
+        dc: date? date .
+  ?proxy edm:isShownBy? mediaURL .
+}
+        LIMIT 100";
+
+            Table table = queryClient.Query(_query);
+            musicianText.text = table.GetOutput(OutputFormat.Table);
+            Debug.Log(table.GetOutput(OutputFormat.Table));
+        }
+
+        public void GetAncestor()
         {
             QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
 
@@ -215,7 +239,7 @@ namespace SPARQLNETClient
 
         public void SendQuery()
         {
-            QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
+            QueryClient queryClient = new QueryClient(endpoint);
             Table table = queryClient.Query(query);
             Debug.Log(table.GetOutput(OutputFormat.Table));
         }
