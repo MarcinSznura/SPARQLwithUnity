@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AncestorScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/MusicianScene.unity
+    guid: 6302a9455f60c0f4b894fc8317768f2f
+  - enabled: 1
+    path: Assets/Scenes/IdeaScene.unity
+    guid: 827dbee1769ffc544b5ed2292213a87c
   m_configObjects: {}
