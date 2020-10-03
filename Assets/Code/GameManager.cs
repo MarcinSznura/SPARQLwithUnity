@@ -16,6 +16,8 @@ namespace SPARQLNETClient
         [SerializeField] TextMeshProUGUI deathText = null;
         [SerializeField] TextMeshProUGUI personText = null;
 
+        [SerializeField] TextMeshProUGUI resultText = null;
+        [SerializeField] GameObject goToSetActive = null;
 
         [SerializeField] string birthPlace = "";
         [SerializeField] string bornBefore = "";
@@ -215,9 +217,12 @@ namespace SPARQLNETClient
 
         public void SendQuery()
         {
-            QueryClient queryClient = new QueryClient(endpoint);
-            Table table = queryClient.Query(query);
-            Debug.Log(table.GetOutput(OutputFormat.Table));
+            QueryClient _queryClient = new QueryClient(endpoint);
+            Table _table = _queryClient.Query(query);
+            Debug.Log(_table.GetOutput(OutputFormat.Table));
+
+            goToSetActive.SetActive(true);
+            resultText.text = _table.GetOutput(OutputFormat.Table);
         }
     }
 #endregion
