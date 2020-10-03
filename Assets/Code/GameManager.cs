@@ -222,11 +222,6 @@ namespace SPARQLNETClient
             Debug.Log(table.GetOutput(OutputFormat.Table));
         }
 
-        public void GoToQueryNumber(int _number)
-        {
-            SceneManager.LoadScene(_number);
-        }
-
         public void FindAnwsers(TextMeshProUGUI _resultField)
         {
             QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
