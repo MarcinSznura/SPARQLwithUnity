@@ -1,7 +1,11 @@
 # SPARQLwithUnity
 
-    This is Unity project that is using SPARQL.NET to get data from dbpedia about people born in specific region. 
-    You can use it to try to find your ancestors based on data stored in dbpedia.
+    This is Unity project that is using SPARQL.NET to get data from SPARQL endpoints. 
+    You can use predefined screens to find:
+    - Your ancestors based on data stored in dbpedia
+    - Music track and composers/singer based on data in europeana.eu
+    - Endpoints in wikidata.org
+    or you can create you own queries.
 
 # Built With
 
