@@ -5,9 +5,7 @@ using SPARQLNET.Objects;
 using SPARQLNET.Misc;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 namespace SPARQLNETClient
 {
@@ -220,14 +218,6 @@ namespace SPARQLNETClient
             QueryClient queryClient = new QueryClient(endpoint);
             Table table = queryClient.Query(query);
             Debug.Log(table.GetOutput(OutputFormat.Table));
-        }
-
-        public void FindAnwsers(TextMeshProUGUI _resultField)
-        {
-            QueryClient queryClient = new QueryClient("http://dbpedia.org/sparql");
-            Table table = queryClient.Query("select distinct ?Concept where {[] a ?Concept} LIMIT 100");
-            Debug.Log(table.GetOutput(OutputFormat.Table));
-            _resultField.text = table.GetOutput(OutputFormat.Table);
         }
     }
 #endregion

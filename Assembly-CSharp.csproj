@@ -63,6 +63,7 @@
     <Compile Include="Assets\Code\GameManager.cs" />
     <Compile Include="Assets\Code\CSVParser.cs" />
     <Compile Include="Assets\Code\Table.cs" />
+    <Compile Include="Assets\Code\IdeasManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
