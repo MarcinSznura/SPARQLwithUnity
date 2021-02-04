@@ -22,7 +22,6 @@
 # Authors
 
     Marcin Sznura
-    Jakub Rączkowiak
 
 # License
 
