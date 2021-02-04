@@ -19,10 +19,6 @@
     Build project with Unity
     Run pc application
     
-# Authors
-
-    Marcin Sznura
-
 # License
 
     This project is licensed under the MIT License - see the LICENSE.md file for details Acknowledgments
